@@ -1,0 +1,104 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>@ViewBag.Title - Компания Diamond</title>
+    @Styles.Render("~/Content/css")
+    @Scripts.Render("~/bundles/modernizr") 
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css" />
+</head>
+<body>
+    <div class="container body-content">
+        <!-- Шапка сайта -->
+        <header id="header" class="header">
+            <div class="container">
+                <div class="wrapper animate__animated animate__fadeIn">
+                    <a href="@Url.Action("Index","Home")">
+                        <img src="~/Content/img/logo.png" runat="server" alt="logo" class="logo animate__animated  animate__fadeInLeft" />
+                    </a>
+                    <h1 class="title">
+                        УСТАНОВКА И РЕМОНТ
+                        ПЛАСТИКОВЫХ ОКОН
+                        В ЕКАТЕРИНБУРГЕ
+                    </h1>
+                    <h1 class="phone">+7-800-555-35-35</h1>
+                    <button type="button" class="order btn btn-primary" data-toggle="modal" data-target="#exampleModal">
+                        <p class="order_text">Заказать обратный звонок</p> <p class="order-text txt2">Звонок</p>
+                    </button>
+                    <button type="button" class="order btn btn-primary">
+                        <ul class="nav navbar-nav">
+                            @if (User.Identity.IsAuthenticated)
+                            {
+                                <p class="order_text">  @Html.ActionLink("ВЫЙТИ", "Logout", "Accounts", null, new { @class = "actionlink" })</p>
+                            }
+                            else
+                            {
+                                <p class="order_text">  @Html.ActionLink("ВОЙТИ", "Login", "Accounts", null, new { @class = "actionlink" })</p>
+                            }
+                        </ul>
+                    </button>
+                </div>
+            </div>
+        </header>
+        <!-- Шапка со ссылками на разделы сайта -->
+        <section class="categories">
+            <div class="container">
+                <div class="wrapper">
+                    <div class="">
+                        <p class="category_text"> @Html.ActionLink("Главная", "Index", "Home", null, new { @class = "actionlink" })</p>
+                    </div>
+                    <div class="">
+                        <p class="category_text">@Html.ActionLink("Продукция", "Products", "Home", null, new { @class = "actionlink" })</p>
+                    </div>
+                    <div class="">
+                        <p class="category_text">@Html.ActionLink("О нас", "About", "Home", null, new { @class = "actionlink" })</p>
+                    </div>
+                    <div class="">
+                        <p class="category_text">@Html.ActionLink("Отзывы", "Index", "Reviews", null, new { @class = "actionlink" })</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+        @RenderBody()
+        <footer class="footer">
+            <div class="container">
+                <p class="footer_text">© @DateTime.Now.Year, все права защищены</p>
+            </div>
+        </footer>
+    </div>
+    <!-- Всплывающее окно с вызовом мастера -->
+    <section class="pop-up">
+        <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content re-call">
+                    <div class="modal-header re-call-edge">
+                        <h5 class="modal-title re-call-title" id="exampleModalLabel">Заказать обратный звонок</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <!-- Заполняемая форма -->
+                    <div class="modal-body">
+                        <form action="#">
+                            <p class="re-call-text">Ваше Имя:</p>
+                            <input type="text" class="alt-input re-call-input" name="name" placeholder="Алексей" required>
+                            <p class="re-call-text">Ваш телефон:</p>
+                            <input type="text" class="alt-input re-call-input" name="tel" placeholder="х-xxx-xxx-xx-хx" pattern="\d{1}[-]\d{3}[-]\d{3}[-]\d{3}[-]\d{3}" required>
+                            <p class="re-call-text">Когда вам удобнее?</p>
+                            <input type="time" class="re-call-input" id="appt" name="appt" min="09:00" max="18:00" required>
+                        </form>
+                    </div>
+                    <div class="modal-footer re-call-edge">
+                        <button type="submit" class="btn btn-primary modal-send"><p class="re-call-button">ЗАКАЗАТЬ</p></button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    @Scripts.Render("~/bundles/jquery")
+    @Scripts.Render("~/bundles/bootstrap")
+    @RenderSection("scripts", required: false)
+</body>
+</html>

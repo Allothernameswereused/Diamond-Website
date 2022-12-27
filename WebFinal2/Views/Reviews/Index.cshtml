@@ -1,0 +1,52 @@
+﻿@model IEnumerable<WebFinal2.Models.Review>
+
+@{
+    ViewBag.Title = "Отзывы покупателей";
+}
+
+<div class="container">
+    <div class="wrapper">
+        <div class="col-xs-6">
+            <h2>Отзывы наших клиентов</h2>
+            <button type="button" class="order btn btn-primary reviewSection">
+                <p class="order_text">  @Html.ActionLink("НАПИСАТЬ ОТЗЫВ", "Create", "Reviews", null, new { @class = "actionlink" })
+            </button>
+            <table class="table">
+
+                @foreach (var item in Model)
+                {
+                    <tr>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Name)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Text)
+                        </td>
+                        <td> 
+                            <button type="button" class="btn btn-primary reviewItemButton">
+                                @Html.ActionLink("👁", "Details", new { id = item.ID })
+                            </button>
+                        </td>
+                        <td>
+                            @if (item.Name == User.Identity.Name)
+                            {
+                                <button type="button" class="btn btn-primary reviewItemButton">
+                                    @Html.ActionLink("✎", "Edit", new { id = item.ID })
+                                </button>
+                            }
+                        </td>
+                        <td>
+                            @if (item.Name == User.Identity.Name)
+                            {
+                                <button type="button" class="btn btn-primary reviewItemButton">
+                                    @Html.ActionLink("🗑", "Delete", new { id = item.ID })
+                                </button>
+                            }
+                        </td>
+                    </tr>
+                }
+
+            </table>
+        </div>
+       </div>
+</div>

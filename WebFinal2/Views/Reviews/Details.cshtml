@@ -1,0 +1,22 @@
+﻿@model WebFinal2.Models.Review
+
+@{
+    ViewBag.Title = "Детали отзыва";
+} 
+
+<div class="container">
+    <div class="wrapper">
+        <div class="col-xs-6 reviewSection">
+                <h2 class="headline about-header">Детали отзыва</h2>
+                <div class="reviewTextSpace">
+                    <h1 class="reviewHeader">@Html.DisplayFor(model => model.Name)</h1>
+                    @Html.DisplayFor(model => model.Text)
+                </div>
+                <button type="button" class="btn btn-primary backbutton">
+                    <p class="order_text">
+                        @Html.ActionLink("Назад", "Index")
+                    </p>
+                </button>
+        </div>
+    </div>
+</div>

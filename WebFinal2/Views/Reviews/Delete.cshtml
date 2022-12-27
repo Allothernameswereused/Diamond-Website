@@ -1,0 +1,43 @@
+﻿@model WebFinal2.Models.Review
+
+@{
+    ViewBag.Title = "Удалить отзыв";
+}
+
+<div class="container"> 
+    <div class="wrapper">
+        <div class="col-xs-6 reviewSection">
+            @if (User.Identity.IsAuthenticated)
+            {
+                <h2 class="headline about-header">Удалить отзыв?</h2>
+                <div class="reviewTextSpace">
+                    <div class="reviewTextSpace">
+                        <h1 class="reviewHeader">@Html.DisplayFor(model => model.Name)</h1>
+                        @Html.DisplayFor(model => model.Text)
+                    </div>
+
+                    @using (Html.BeginForm())
+                    {
+                        @Html.AntiForgeryToken()
+
+                        <div class="form-actions no-color">
+                            <input type="submit" value="УДАЛИТЬ" class="input send order_text" />
+                        </div>
+                    }
+                </div>
+                <button type="button" class="btn btn-primary backbutton">
+                    <p class="order_text">
+                        @Html.ActionLink("Назад", "Index")
+                    </p>
+                </button>
+            }
+            else
+            {
+                <h2 class="headline about-header">Вы не вошли в аккаунт!</h2>
+                <button type="button" class="order btn btn-primary">
+                    <p class="order_text">  @Html.ActionLink("ВОЙТИ", "Login", "Accounts", null, new { @class = "actionlink" })</p>
+                </button>
+            }
+        </div>
+    </div>
+</div>
